@@ -1,0 +1,134 @@
+<div class="container pt-4 pb-5">
+	<ul class="nav nav-pills mb-4">
+		<li class="nav-item">
+			<a href="javascript:"
+				class="nav-link"
+				:class="{active: activeTab === 1}"
+				@click="activeTab=1"
+			>今日收益</a>
+		</li>
+		<li class="nav-item">
+			<a href="javascript:"
+				class="nav-link"
+				:class="{active: activeTab === 2}"
+				@click="activeTab=2"
+			>存取记录</a>
+		</li>
+		<li class="nav-item">
+			<a href="javascript:"
+				class="nav-link"
+				:class="{active: activeTab === 3}"
+				@click="activeTab=3"
+			>每日收益</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane" :class="{active: activeTab === 1}">
+			<div class="card" style="max-width: 400px;">
+				<div class="card-header">今日收益</div>
+				<div class="table-responsive">
+					<table class="table table-striped mb-0">
+						<tbody>
+							<tr>
+								<th>用户</th>
+								<td>{{user.username}}</td>
+							</tr>
+							<tr>
+								<th>日期</th>
+								<td>{{todayStat.date}}</td>
+							</tr>
+							<tr>
+								<th>本金</th>
+								<td>{{todayStat.curCapital}}</td>
+							</tr>
+							<tr>
+								<th>日利息</th>
+								<td>{{todayStat.dayInterest}}</td>
+							</tr>
+							<tr>
+								<th>日利率(%%)</th>
+								<td>{{todayStat.dayRate}}</td>
+							</tr>
+							<tr>
+								<th>存款天数</th>
+								<td>{{todayStat.depositDays}}</td>
+							</tr>
+							<tr>
+								<th>累计利息</th>
+								<td>{{todayStat.accumInterest}}</td>
+							</tr>
+							<tr>
+								<th>总金额</th>
+								<td>{{todayStat.curMoney}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane" :class="{active: activeTab === 2}">
+			<div class="card">
+				<div class="card-header">存取记录</div>
+				<div class="table-responsive">
+					<table class="table table-striped mb-0">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>日期</th>
+								<th>金额</th>
+								<th>类型</th>
+								<th>年利率(%)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(obj,index) in depositList">
+								<th>{{index+1}}</th>
+								<td>{{obj.confirmDate}}</td>
+								<td>{{obj.money}}</td>
+								<td>{{obj.type | depositType}}</td>
+								<td>{{obj.yearRate}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane" :class="{active: activeTab === 3}">
+			<div class="card">
+				<div class="card-header">每日收益</div>
+				<div class="table-responsive">
+					<table class="table table-striped mb-0">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>日期</th>
+								<th>存款(+)</th>
+								<th>取款(-)</th>
+								<th>本金</th>
+								<th>日利息</th>
+								<th>日利率(%%)</th>
+								<th>存款天数</th>
+								<th>累计利息</th>
+								<th>总金额</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="(obj,index) in dayStatList">
+								<th>{{index+1}}</th>
+								<td>{{obj.date}}</td>
+								<td>{{obj.depositMoney}}</td>
+								<td>{{obj.drawMoney}}</td>
+								<td>{{obj.curCapital}}</td>
+								<td>{{obj.dayInterest}}</td>
+								<td>{{obj.dayRate}}</td>
+								<td>{{obj.depositDays}}</td>
+								<td>{{obj.accumInterest}}</td>
+								<td>{{obj.curMoney}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
