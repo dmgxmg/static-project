@@ -65,6 +65,12 @@ define([
 			confirmDate: '2018-04-18',
 			yearRate: 3,
 			money: 10000
+		},
+		{
+			type: 'deposit',
+			confirmDate: '2018-05-07',
+			yearRate: 3,
+			money: 20000
 		}
 	];
 
