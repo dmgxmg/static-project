@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function calcYearMoney(startMoney, earnMoeny, yearRate){
+			return startMoney*(1+yearRate/100)+earnMoeny;
+		}
+		var year = 35;
+		var startMoney = 80;
+		var yearEarnMoney = 38;
+		var yearRate = 4;
+		var money = startMoney;
+		var index = 0;
+		console.log(index+'年后钱数:',parseInt(money));
+		while(year > 0){
+			index++;
+			startMoney = money;
+			money = calcYearMoney(money, yearEarnMoney, yearRate);
+			console.log(index+'年后钱数:',parseInt(money), '利息:', parseInt(money-startMoney-yearEarnMoney));
+			year--;
+		}
+	</script>
+</body>
+</html>

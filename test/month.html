@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>MonthMoney</title>
+</head>
+<body>
+	<!-- <script src="https://cdn.bootcss.com/lodash.js/4.17.5/lodash.min.js"></script> -->
+	<script src="https://cdn.bootcss.com/moment.js/2.22.1/moment.min.js"></script>
+	<script>
+		var monthBaseMoney = 13100 + 1500 + 300 + 11900 - 3000;
+		var moneyInArr = [
+			1600,
+			4000,
+			100000,
+			800,
+			0,
+			0,
+			0,
+			800,
+			1600,
+			0,
+			0,
+			0
+		];
+		var startMoney = 650000+150000;
+		var monthRate = 4/1200;
+		var monthCount = 35*12;
+		var money = startMoney;
+		var monthMoment = moment();
+		var monthFormat = 'YYYYMM';
+		console.log(getMonthFormatStr(),'钱数:', getMoneyStr(money));
+
+		while(monthCount > 0){
+			startMoney = money;
+			monthMoment.add(1, 'months');
+			var month = monthMoment.month();
+			var monthIn = getMonthInMoney(month);
+			money = calcMonthMoney(month, money);
+			console.log(getMonthFormatStr(),'钱数:', getMoneyStr(money), '工资:',getMoneyStr(monthIn), '利息:',getMoneyStr(money-startMoney-monthIn));
+			monthCount--;
+		}
+
+		function getMonthInMoney(month){
+			return moneyInArr[month]+monthBaseMoney;
+		}
+		function calcMonthMoney(month, startMoney){
+			return startMoney*(1+monthRate)+getMonthInMoney(month);
+		}
+		function getMonthFormatStr(){
+			return monthMoment.format(monthFormat);
+		}
+		function getMoneyStr(money){
+			return (money/10000).toFixed(2)+'万';
+		}
+	</script>
+</body>
+</html>

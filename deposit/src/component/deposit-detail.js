@@ -106,6 +106,11 @@ define([
 			confirmDate: '2018-10-18',
 			yearRate: 3,
 			money: 13300
+		},
+		{
+			type: 'draw',
+			confirmDate: '2019-06-24',
+			money: 10000
 		}
 	];
 
