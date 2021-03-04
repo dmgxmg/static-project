@@ -125,6 +125,35 @@ define([
 			money: 58000
 		}
 	];
+	var rentConfig = {
+		startDate: '2021-01-01',
+		endDate: undefined,
+		money: 1800,
+		rentDay: 15
+	};
+
+	function updateDepositList(){
+		var startDate = rentConfig.startDate;
+		var endDate = rentConfig.endDate;
+		var days = moment(endDate).startOf('day').diff(moment(startDate).startOf('day'), 'days');
+		for (var i=0; i <= days; i++) {
+			var m = moment(startDate).add(i, 'days');
+			if (m.date() !== rentConfig.rentDay){
+				continue;
+			}
+
+			depositList.push({
+				type: 'rent',
+				confirmDate: m.format('YYYY-MM-DD'),
+				money: rentConfig.money
+			});
+		}
+		depositList = _.sortBy(depositList, function(item){
+			return new Date(item.confirmDate);
+		});
+	}
+
+	updateDepositList();
 
 	return {
 		template: tpl,
@@ -157,6 +186,7 @@ define([
 									dayDepositArr.push(obj);
 									break;
 								case 'draw':
+								case 'rent':
 									dayDrawArr.push(obj);
 									break;
 							}
@@ -221,18 +251,37 @@ define([
 				return stat || {
 					date: date
 				};
+			},
+			reversedDepositList: function(){
+				return _.reverse(this.depositList);
 			}
 		},
 		filters: {
 			depositType: function(type){
 				switch(type){
 					case 'deposit':
-						return '存款(+)';
+						return '存款';
 					case 'draw':
-						return '取款(-)';
+						return '取款';
+					case 'rent':
+						return '房租';
 					default:
-						return '[未知]';
+						return '';
 				}
+			},
+			depositSign: function(type){
+				switch(type){
+					case 'deposit':
+						return '+';
+					case 'draw':
+					case 'rent':
+						return '-';
+					default:
+						return '';
+				}
+			},
+			signedMoney: function(money, sign){
+				return money > 0 ? sign + money : money;
 			}
 		}
 	};

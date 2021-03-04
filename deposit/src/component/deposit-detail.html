@@ -81,10 +81,10 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="(obj,index) in depositList">
+							<tr v-for="(obj,index) in reversedDepositList">
 								<th>{{index+1}}</th>
 								<td>{{obj.confirmDate}}</td>
-								<td>{{obj.money}}</td>
+								<td>{{obj.type | depositSign}}{{obj.money}}</td>
 								<td>{{obj.type | depositType}}</td>
 								<td>{{obj.yearRate}}</td>
 							</tr>
@@ -102,8 +102,8 @@
 							<tr>
 								<th>#</th>
 								<th>日期</th>
-								<th>存款(+)</th>
-								<th>取款(-)</th>
+								<th>存款</th>
+								<th>取款</th>
 								<th>本金</th>
 								<th>日利息</th>
 								<th>日利率(%%)</th>
@@ -116,8 +116,8 @@
 							<tr v-for="(obj,index) in dayStatList">
 								<th>{{index+1}}</th>
 								<td>{{obj.date}}</td>
-								<td>{{obj.depositMoney}}</td>
-								<td>{{obj.drawMoney}}</td>
+								<td>{{obj.depositMoney | signedMoney('+')}}</td>
+								<td>{{obj.drawMoney | signedMoney('-')}}</td>
 								<td>{{obj.curCapital}}</td>
 								<td>{{obj.dayInterest}}</td>
 								<td>{{obj.dayRate}}</td>
