@@ -463,6 +463,12 @@ define([
 			confirmDate: '2025-09-24',
 			yearRate: 3,
 			money: 7000
+		},
+		{
+			type: 'deposit',
+			confirmDate: '2025-10-20',
+			yearRate: 3,
+			money: 7000
 		}
 	];
 	var rentConfig = {
